@@ -1,5 +1,6 @@
 package com.ashunevich.wallapop_demo
 
+import com.kaspersky.components.kautomator.component.bottomnav.UiBottomNavigationView
 import com.kaspersky.components.kautomator.component.common.views.UiView
 import com.kaspersky.components.kautomator.screen.UiScreen
 
@@ -7,17 +8,7 @@ fun mainScreen(func: MainScreenRobot.() -> Unit) = MainScreenRobot("com.wallapop
 
 class MainScreenRobot(override val packageName: String) : UiScreen<MainScreenRobot>() {
 
-    val uploadButton = UiView {
-        withIndex(2) { withId(this@MainScreenRobot.packageName, "upload")
-        withContentDescription("Upload")}
-    }//TODO automator can't find?
+    val bottomNavigationUploadView =
+        UiBottomNavigationView { withId(this@MainScreenRobot.packageName, "upload") }
 
-    fun verify(){
-        idleFor(5000)
-        uploadButton.isDisplayed()
-    }
-
-    fun moveToUploadScreen(){
-        uploadButton.click()
-    }
 }
