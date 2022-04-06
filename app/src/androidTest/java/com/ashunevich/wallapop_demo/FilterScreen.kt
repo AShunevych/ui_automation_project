@@ -3,6 +3,7 @@ package com.ashunevich.wallapop_demo
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import com.kaspersky.components.kautomator.component.bottomnav.UiBottomNavigationView
+import com.kaspersky.components.kautomator.component.common.views.UiView
 import com.kaspersky.components.kautomator.component.text.UiTextView
 import com.kaspersky.components.kautomator.screen.UiScreen
 
@@ -17,4 +18,8 @@ class FilterScreen(override val packageName: String) : UiScreen<FilterScreen>() 
     val itemList = UiScrollable(UiSelector().resourceId(TestHelper.viewId("wallList")))
 
     val priceFilter = UiTextView{withText("Price")}
+
+    val backToFilterScreen = UiView{
+        withContentDescription("Navigate up")
+    }
 }

@@ -1,10 +1,11 @@
 package com.ashunevich.wallapop_demo
 
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 
-fun runApp(func: AppRunRobot.() -> Unit) = AppRunRobot().apply { func() }
+fun appService(func: AppRunRobot.() -> Unit) = AppRunRobot().apply { func() }
 
 class AppRunRobot {
 
@@ -20,18 +21,8 @@ class AppRunRobot {
     }
 
     fun stopApp(){
-        device.pressHome()
-        device.pressRecentApps()
-
-        device.swipe(1033,1346,531,1346,20)
-
-        val clear  = device.findObject(UiSelector()
-            .resourceId("com.android.systemui:id/button")
-            .text("CLEAR ALL"))
-
-        if (clear.exists())
-        {
-            clear.click();
+        repeat(2){
+            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).pressBack()
         }
     }
 }

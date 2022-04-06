@@ -1,6 +1,8 @@
 package com.ashunevich.wallapop_demo
 
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +25,7 @@ class WallapopDemoTest : TestCase() {
     fun testUploadAndFindItem() {
         Thread.sleep(5000)
         before() {
-            runApp {
+            appService {
                 startApp()
             }
         }.after {
@@ -108,11 +110,12 @@ class WallapopDemoTest : TestCase() {
 
         Thread.sleep(5000)
         before {
-            runApp {
+            appService {
                 startApp()
             }
         }.after {
         }.run {
+            //TODO закоментируй логин скрин - или поставль  логин
             step("Star the App") {
                 loginScreen {
                     startApp(andSkip = true)
@@ -218,10 +221,15 @@ class WallapopDemoTest : TestCase() {
                     filterCounter {
                         hasText("1")
                     }
+                    backToFilterScreen{
+                        click()
+                    }
                 }
             }
             step("Close the app"){
-                //TODO
+                appService{
+                    stopApp()
+                }
             }
         }
     }
