@@ -2,7 +2,6 @@ package com.ashunevich.wallapop_demo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.components.kautomator.component.bottomnav.UiBottomNavigationView
 import com.kaspersky.components.kautomator.component.common.views.UiView
 import com.kaspersky.components.kautomator.component.edit.UiEditText
 import com.kaspersky.components.kautomator.component.text.UiButton
