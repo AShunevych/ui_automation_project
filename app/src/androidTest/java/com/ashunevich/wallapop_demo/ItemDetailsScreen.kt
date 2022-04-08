@@ -45,4 +45,8 @@ class ItemDetailsRobot(override val packageName: String) : UiScreen<MainScreenRo
     val priceEditText = UiEditText {
         withText("Price*")
     }
+
+    val continueButtonView = UiView {
+        withId(this@ItemDetailsRobot.packageName, "button_action")
+    }
 }

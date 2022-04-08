@@ -3,7 +3,9 @@ package com.ashunevich.wallapop_demo
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.lang.Exception
@@ -17,20 +19,25 @@ class WallapopDemoTest : TestCase() {
     val validEmailArtem = "artiom2002@ukr.net"
     val validPassArtem = "Kleker99999"
 
+    @After
+    fun after() {
+        TestHelper.closeTheApp()
+    }
+
     /**
      * Move app shortcut to main screen
      */
-
-    @Test
-    fun testUploadAndFindItem() {
-        Thread.sleep(5000)
-        before() {
-            appService {
-                startApp()
-            }
-        }.after {
-
-        }.run {
+//
+//    @Test
+//    fun testUploadAndFindItem() {
+//        Thread.sleep(5000)
+//        before() {
+//            appService {
+//                startApp()
+//            }
+//        }.after {
+//
+//        }.run {
 //            step("Star the App") {
 //                loginScreen {
 //                    startApp(andSkip = false)
@@ -44,64 +51,95 @@ class WallapopDemoTest : TestCase() {
 //                    )
 //                }
 //            }
-            step("Tap on Upload button") {
-                mainScreen {
-                    bottomNavigationUploadView.click()
-                }
-            }
-            step("Select Category") {
-                selectCategoryScreen {
-                    categoryList.getChild(TestHelper.getRowItem(3, "rootView")).click()
-                }
-            }
-            step("Enter Item details") {
-                itemDetailsScreen {
-                    titleEditText.click()
-                    titleEditText.replaceText("Glasses")
-                    descriptionEditText.click()
-                    descriptionEditText.replaceText("Glasses")
-                }
-            }
-            step("Try chooce a brand") {
-                itemDetailsScreen {
-                    try {
-                        brandView.click()
-                    } catch (e: Exception) {
-
-                    }
-                }
-            }
-            step("Choose Subcategory") {
-                itemDetailsScreen {
-                    subcategoryView.click()
-                }
-                subcategoryScreen {
-                    typeOfSubcategory.getChild(TestHelper.getRowItem(OTHER, "rootView")).click()
-                }
-            }
-            step("Choose Item condition") {
-                itemDetailsScreen {
-                    itemConditionView.click()
-                }
-                itemConditionScreen {
-                    itemConditionList.getChild(TestHelper.getRowItem(AS_GOOD_AS_NEW, "rootView"))
-                        .click()
-                }
-            }
-            step("Set Price") {
-                itemDetailsScreen {
-                    priceEditText.click()
-                    priceEditText.replaceText("10")
-                }
-            }
-            step("Set Item image") {
-                itemDetailsScreen {
-                    itemImageView.click()
-                }
-            }
-
-        }
-    }
+//            step("Tap on Upload button") {
+//                mainScreen {
+//                    bottomNavigationUploadView.click()
+//                }
+//            }
+//            step("Select Category") {
+//                selectCategoryScreen {
+//                    categoryList.getChild(TestHelper.getRowItem(3, "rootView")).click()
+//                }
+//            }
+//            step("Enter Item details") {
+//                itemDetailsScreen {
+//                    titleEditText.click()
+//                    titleEditText.replaceText("Glasses")
+//                    descriptionEditText.click()
+//                    descriptionEditText.replaceText("Glasses")
+//                }
+//            }
+//            step("Try chooce a brand") {
+//                itemDetailsScreen {
+//                    try {
+//                        brandView.click()
+//                    } catch (e: Exception) {
+//
+//                    }
+//                }
+//            }
+//            step("Choose Subcategory") {
+//                itemDetailsScreen {
+//                    subcategoryView.click()
+//                }
+//                subcategoryScreen {
+//                    typeOfSubcategory.getChild(TestHelper.getRowItem(OTHER, "rootView")).click()
+//                }
+//            }
+//            step("Choose Item condition") {
+//                itemDetailsScreen {
+//                    itemConditionView.click()
+//                }
+//                itemConditionScreen {
+//                    itemConditionList.getChild(TestHelper.getRowItem(AS_GOOD_AS_NEW, "rootView"))
+//                        .click()
+//                }
+//            }
+//            step("Set Price") {
+//                itemDetailsScreen {
+//                    priceEditText.click()
+//                    priceEditText.replaceText("10")
+//                    TestHelper.closeKeyboard()
+//                }
+//            }
+//            step("Tap on set Item image") {
+//                itemDetailsScreen {
+//                    itemImageView.click()
+//                }
+//            }
+//            step("Take a photo and set Image") {
+//                photoScreen {
+//                    shotButtonView.click()
+//                    imageView.isDisplayed()
+//                    acceptImagesTakenView.click()
+//                }
+//            }
+//            step("Tap on Continue") {
+//                itemDetailsScreen {
+//                    continueButtonView.click()
+//                }
+//            }
+//
+//            step("Tap on Continue") {
+//                itemDetailsScreen {
+//                    continueButtonView.click()
+//                }
+//            }
+//
+//            step("Tap on Continue") {
+//                itemDetailsScreen {
+//                    continueButtonView.click()
+//                }
+//            }
+//
+//            step("Verify that item is listed") {
+//                itemListedScreen {
+//                    gotItButtonView.click()
+//                    originalTitleView.isDisplayed()
+//                }
+//            }
+//        }
+//    }
 
     @Test
     fun testUserFilterInteraction() {
@@ -115,7 +153,6 @@ class WallapopDemoTest : TestCase() {
             }
         }.after {
         }.run {
-            //TODO закоментируй логин скрин - или поставль  логин
             step("Star the App") {
                 loginScreen {
                     startApp(andSkip = true)
@@ -174,8 +211,8 @@ class WallapopDemoTest : TestCase() {
 
                     Thread.sleep(5000)
                     priceSelector {
-                        selectMinimumPrice(price=minimumPrice)
-                        selectMaximumPrice(price=maximumPrice)
+                        selectMinimumPrice(price = minimumPrice)
+                        selectMaximumPrice(price = maximumPrice)
 
                         applyPriceFilter {
                             click()
@@ -183,54 +220,7 @@ class WallapopDemoTest : TestCase() {
                     }
                 }
             }
-
-            step("Verify that filter applied correctly") {
-                filterScreen {
-                    Thread.sleep(5000)
-                    filterCounter {
-                        hasText("3")
-                        click()
-                    }
-                }
-                filterSetupScreen {
-                    Thread.sleep(5000)
-                    priceFrom {
-                        hasText("0€")
-                    }
-                    priceTo{
-                        hasText("5€")
-                    }
-
-                    resetAllFilter{
-                        click()
-                    }
-                    Thread.sleep(2000)
-
-                    priceTittle{
-                        hasText("Any price")
-                    }
-
-                    applyFiltersButton {
-                        click()
-                    }
-            }
-            }
-            step("Verify filters are reset") {
-                filterScreen {
-                    Thread.sleep(5000)
-                    filterCounter {
-                        hasText("1")
-                    }
-                    backToFilterScreen{
-                        click()
-                    }
-                }
-            }
-            step("Close the app"){
-                appService{
-                    stopApp()
-                }
-            }
         }
+
     }
 }

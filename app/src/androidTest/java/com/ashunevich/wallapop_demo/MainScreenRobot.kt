@@ -12,5 +12,6 @@ class MainScreenRobot(override val packageName: String) : UiScreen<MainScreenRob
     val bottomNavigationUploadView =
         UiBottomNavigationView { withId(this@MainScreenRobot.packageName, "upload") }
 
-    val itemFilters  = UiScrollable(UiSelector().resourceId(TestHelper.viewId("recyclerView")))
+    val itemFilters = UiScrollable(UiSelector().resourceId(TestHelper.viewId("recyclerView")))
+
 }

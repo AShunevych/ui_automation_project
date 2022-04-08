@@ -1,13 +1,14 @@
 package com.ashunevich.wallapop_demo
 
+import android.view.accessibility.AccessibilityWindowInfo
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
-import com.ashunevich.wallapop_demo.TestHelper
+import com.kaspersky.components.kautomator.component.text.UiButton
 import junit.framework.Assert.assertEquals
-import java.lang.Exception
-import kotlin.Throws
+
 
 const val APP_PACKAGE_NAME = "com.wallapop"
 
@@ -56,5 +57,28 @@ object TestHelper {
         return UiSelector()
             .resourceId(resourceId(resourceId))
             .enabled(true).instance(itemIndex)
+    }
+
+    fun isKeyboardOpened(): Boolean {
+        for (window in getInstrumentation().getUiAutomation()
+            .getWindows()) {
+            if (window.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun closeKeyboard() {
+        if(isKeyboardOpened()){
+            UiDevice.getInstance(getInstrumentation()).pressBack()
+        }
+    }
+
+    fun closeTheApp() {
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).pressRecentApps()
+        UiButton {
+            withText("Close all")
+        }.click()
     }
 }
